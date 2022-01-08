@@ -1,10 +1,27 @@
 from pprint import pprint
-from helpers import printMap
+from helpers import printMap, shipSizes
+
+WIDTH = 10
 
 def main():
-    WIDTH = 10
+    
     playerMap = [['.' for i in range(WIDTH)] for j in range(WIDTH)]
-    setShips(playerMap)
+    playerMap = setShips(playerMap)
+    AIMap = randomMap()
+    printMap(AIMap)
+
+def randomMap():
+    randomMap = [['.' for i in range(WIDTH)] for j in range(WIDTH)]
+    pos = {
+        'x' : 0, 'y' : 0
+    }
+    for ship in shipSizes().keys():
+        cmd = f"{ship} {pos['x']} {pos['y']} H"
+        randomMap = placeShip(randomMap, cmd)
+        pos['x'] += 1
+    
+    return randomMap
+
 
 def setShips(playerMap):
     validShips = ['A','B','C','D','S']
@@ -54,13 +71,7 @@ def validCommand(remainingShips, cmd, playerMap):
     return True
 
 def checkPositions(ship, x, y, dir):
-    validShips = {
-        'A' : 5,
-        'B' : 4,
-        'C' : 3,
-        'D' : 2,
-        'S' : 3
-    }
+    validShips = shipSizes()
 
     if ship not in validShips.keys():
         print(f"Could not find {ship} in validShips.")
