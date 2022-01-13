@@ -9,6 +9,7 @@ class Sea:
         self.width = width
     
     def setShips(self, ships):
+        self.print()
         while len(ships) > 0:
             print(f"Ships remaining: {ships}")
             print("Enter ship positions:")
@@ -38,15 +39,18 @@ class Sea:
         return True
 
     def autoSetShips(self, ships):
-        y, direction = 0, 'H'
+        y, direction = 0, 'V'
         for x in range(len(ships)):
             ship = createShip(ships[x], x, y, direction)
             self.__trySetShip(ship)
+        print("Automap layout:")
+        self.print()
 
     def allSunk(self):
         for ship in self.ships:
             if not ship.isSunk():
                 return False
+        
 
         return True
 
@@ -63,51 +67,5 @@ class Sea:
         sea = [['.' for i in range(self.width)] for j in range(self.height)]
         for ship in self.ships:
             for pos in ship.getPos():
-                sea[pos['y']][pos['x']] = ship.getType().value
+                sea[pos.getY()][pos.getX()] = ship.getType().value
         printMap(sea)
-
-
-
-# def setShips(playerMap):
-#     validShips = ['A','B','C','D','S']
-#     printMap(playerMap)
-#     while len(validShips) > 0:
-#         print(f"Ships remaining: {validShips}")
-#         print("Enter ship positions:")
-
-#         cmd = input()
-#         if validCommand(validShips,cmd, playerMap):
-#             playerMap = placeShip(playerMap, cmd)
-#             print("Ship set.")
-#             printMap(playerMap)
-#             validShips.remove(cmd[0])
-#         else:
-#             print("Invalid command. Try again")
-
-# def validCommand(remainingShips, cmd, playerMap):
-#     ORIENTATIONS = ['H', 'V']
-#     cmd = cmd.split(' ')
-#     # check correct number of input arguments
-#     if len(cmd) != 4:
-#         return False
-    
-#     ship, x, y, orient = cmd
-#     # type checking
-#     if ship not in remainingShips or not (x.isnumeric() and y.isnumeric()) or orient not in ORIENTATIONS:
-#         return False
-
-#     x = int(x)
-#     y = int(y)
-
-#     # checking bounds for x and y
-#     if x not in range(len(playerMap)) or y not in range(len(playerMap)):
-#         return False
-
-#     # querying locations on the map to check
-#     checks = checkPositions(ship, x, y, orient)
-
-#     # checking that the ship can be placed
-#     for pos in checks:
-#         if pos['x'] < 0 or len(playerMap) <= pos['x'] or pos['y'] < 0 or len(playerMap) <= pos['y'] or playerMap[pos['x']][pos['y']] != '.':
-#             return False
-#     return True

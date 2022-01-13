@@ -1,3 +1,5 @@
+from position import Position
+
 def printMap(map):
     print('\n'.join('  '.join(str(x) for x in row) for row in map))
 
@@ -18,10 +20,10 @@ def inputToPos(x, y, length, direction):
     l = []
     if direction == 'H':
         for i in range(length):
-            l.append({'x' : x + i, 'y' : y})
+            l.append(Position(x+i, y))
     elif direction == 'V':
         for i in range(length):
-            l.append({'x' : x, 'y' : y + i})
+            l.append(Position(x,y+i))
     return l    
 
 def shipSizes():

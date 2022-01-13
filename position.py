@@ -1,6 +1,3 @@
-from this import d
-
-
 class Position:
     def __init__(self,x,y):
         self.x = x
@@ -15,9 +12,9 @@ class Position:
     def getY(self):
         return self.y
     
-    def __eq__(self, other):
-        if isinstance(other, Position):
-            return self.x == other.x and self.y == other.y
-        return False
+    # def __eq__(self, other):
+    #     if isinstance(other, Position):
+    #         return self.x == other.x and self.y == other.y
+    #     return False
     
     

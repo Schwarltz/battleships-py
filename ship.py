@@ -19,9 +19,12 @@ class Ship:
     Raises flag if there is a position that is out of bounds
     '''
     def inMap(self, sea):
-        outOfBounds = [x for x in self.pos if not (0 <= x['x'] < sea.getWidth() and 0 <= x['y'] < sea.getHeight())]
+        outOfBounds = [x for x in self.pos.keys() if not (0 <= x.getX() < sea.getWidth() and 0 <= x.getY() < sea.getHeight())]
         return not bool(outOfBounds)
     
+    '''
+    Raise flag if all sections are hit 
+    '''
     def isSunk(self):
         return not (False in self.pos.values())
             
