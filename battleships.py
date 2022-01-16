@@ -2,20 +2,41 @@ from pprint import pprint
 from helpers import printMap, shipSizes, print2Maps
 from legend import Legend
 from sea import Sea
+import re
 
+HEIGHT = 10
 WIDTH = 10
 
 def main():
-    player = Sea(WIDTH, WIDTH)
-    player.setShips(['A', 'B', 'C', 'D', 'S'])
-    ai = Sea(WIDTH, WIDTH)
-    ai.autoSetShips(['A', 'B', 'C', 'D', 'S'])
+    player = Sea(HEIGHT, WIDTH)
+    player.autoSetShips(['C', 'D'])
+    ai = Sea(HEIGHT, WIDTH)
+    ai.autoSetShips(['D'])
     while not (player.allSunk() or ai.allSunk()):
         playGame(player, ai)
-        break
+    
+    if player.allSunk():
+        print('Game Over!')
+    else:
+        print('You won!')
 
 def playGame(player, ai):
-    pass
+    print2Maps(player.toMap(), ai.toMap())
+    # prompt the player to select a coordinate
+    print("Select a coordinate to hit:")
+    cmd = input()
+    validCmd = re.match(r'[0-9]+ [0-9]+', cmd)
+    if not validCmd:
+        print('Invalid Command.')
+
+    row, col = cmd.split()
+    row, col = int(row), int(col)
+    PSuccess = ai.hit(row,col)
+    if PSuccess:
+        print('Hit confirmed!')
+    else:
+        print('That one missed...')
+
 
 
 if __name__ == "__main__":

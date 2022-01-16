@@ -15,15 +15,15 @@ def print2Maps(map1, map2):
     for i in range(len(map1)):
         print('  '.join(str(x) for x in map1[i]) + '    ' + '  '.join(str(x) for x in map2[i]))
 
-def inputToPos(x, y, length, direction):
-    x, y = int(x), int(y)
+def inputToPos(row, col, length, direction):
+    row, col = int(row), int(col)
     l = []
     if direction == 'H':
         for i in range(length):
-            l.append(Position(x+i, y))
+            l.append(Position(row, col+i))
     elif direction == 'V':
         for i in range(length):
-            l.append(Position(x,y+i))
+            l.append(Position(row+i, col))
     return l    
 
 def shipSizes():

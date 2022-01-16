@@ -4,17 +4,17 @@ from cruiser import Cruiser
 from destroyer import Destroyer
 from submarine import Submarine
 
-def createShip(type, x, y, direction):
+def createShip(type, row, col, direction):
     if type == 'A':
-        return Carrier(x,y,direction)
+        return Carrier(row, col, direction)
     elif type == 'B':
-        return Battleship(x,y,direction)
+        return Battleship(row,col,direction)
     elif type == 'C':
-        return Cruiser(x,y,direction)
+        return Cruiser(row,col,direction)
     elif type == 'D':
-        return Destroyer(x,y,direction)
+        return Destroyer(row,col,direction)
     elif type == 'S':
-        return Submarine(x,y,direction)
+        return Submarine(row,col,direction)
     else:
         print(f"Unknown type {type}")
         return None

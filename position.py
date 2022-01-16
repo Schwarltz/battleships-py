@@ -1,20 +1,26 @@
 class Position:
-    def __init__(self,x,y):
-        self.x = x
-        self.y = y
+    def __init__(self,row,col):
+        self.row = row
+        self.col = col
 
     def toDict(self):
-        return {'x': self.x, 'y': self.y}
+        return {'row': self.row, 'col': self.col}
 
     def getX(self):
-        return self.x
+        return self.row
     
     def getY(self):
-        return self.y
+        return self.col
     
-    # def __eq__(self, other):
-    #     if isinstance(other, Position):
-    #         return self.x == other.x and self.y == other.y
-    #     return False
+    def __eq__(self, other):
+        if not isinstance(other, Position):
+            return NotImplemented
+        return self.row == other.row and self.col == other.col
+    
+    def __hash__(self):
+        return hash((self.row, self.col))
+         
+    
+
     
     
