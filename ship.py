@@ -8,30 +8,25 @@ class Ship:
         positions = inputToPos(row, col, length, direction)
         self.positions = dict.fromkeys(positions, False)
         
-    '''
-    Raises flag if both ships share a coordinate
-    '''
+    
     def isColliding(self, other):
+        '''Raises flag if both ships share a coordinate.'''
         collisions = [x for x in self.positions if x in other.positions]
         return bool(collisions)
 
-    '''
-    Raises flag if there is a position that is out of bounds
-    '''
+    
     def inMap(self, sea):
+        '''Raises flag if there is a position that is out of bounds.'''
         outOfBounds = [x for x in self.positions.keys() if not (0 <= x.getX() < sea.getWidth() and 0 <= x.getY() < sea.getHeight())]
         return not bool(outOfBounds)
     
-    '''
-    Raise flag if all sections are hit 
-    '''
     def isSunk(self):
+        '''Raise flag if all sections are hit.'''
         return not (False in self.positions.values())
 
-    '''
-    Returns a flag for success if the ship is hit
-    '''
+
     def getHit(self, pos):
+        '''Raises flag if the ship is successfully hit.'''
         if pos in self.positions:
             self.positions[pos] = True
             return True
@@ -42,6 +37,12 @@ class Ship:
     
     def getPos(self):
         return self.positions.keys()
+
+    def getUnhitPositions(self):
+        '''
+        Returns a list of positions that have not been hit.
+        '''
+        return [x for x in self.positions if not self.positions[x]]
     
     def getValAtPos(self,pos):
         return self.positions.get(pos)

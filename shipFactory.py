@@ -5,6 +5,18 @@ from destroyer import Destroyer
 from submarine import Submarine
 
 def createShip(type, row, col, direction):
+    '''
+    Creates a ship matching starting parameters.
+
+        Parameters:
+            type (str): the type of ship being created.
+            row (int): the row the ship should be placed in first.
+            col (int): the column of the ship should be placed in first.
+            direction (str): which way the ship should go (either horizontal or vertical).
+        
+        Returns:
+            A Ship instance.
+    '''
     if type == 'A':
         return Carrier(row, col, direction)
     elif type == 'B':

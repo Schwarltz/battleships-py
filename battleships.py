@@ -10,9 +10,9 @@ WIDTH = 10
 
 def main():
     player = Sea(HEIGHT, WIDTH)
-    player.autoSetShips2(['A','B','C','D','S'])
+    player.setShips(['A','B','C','D','S'])
     ai = Sea(HEIGHT, WIDTH)
-    ai.autoSetShips2(['A','B','C','D','S'])
+    ai.randomSetShips(['A','B','C','D','S'])
     while not (player.allSunk() or ai.allSunk()):
         print2Maps(player.toMap(), ai.toMap())
         playerMove(ai)
