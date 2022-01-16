@@ -44,8 +44,7 @@ class Ship:
         return self.positions.keys()
     
     def getValAtPos(self,pos):
-        isHit = self.positions.get(pos)
-        if isHit:
-            return Legend.HIT
-        else:
-            return self.type
+        return self.positions.get(pos)
+
+    def getName():
+        raise NotImplementedError('Please implement this.')

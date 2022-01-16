@@ -9,9 +9,9 @@ WIDTH = 10
 
 def main():
     player = Sea(HEIGHT, WIDTH)
-    player.autoSetShips(['C', 'D'])
+    player.autoSetShips2(['A','B','C','D','S'])
     ai = Sea(HEIGHT, WIDTH)
-    ai.autoSetShips(['D'])
+    ai.autoSetShips2(['A','B','C','D','S'])
     while not (player.allSunk() or ai.allSunk()):
         playGame(player, ai)
     
@@ -28,6 +28,7 @@ def playGame(player, ai):
     validCmd = re.match(r'[0-9]+ [0-9]+', cmd)
     if not validCmd:
         print('Invalid Command.')
+        return
 
     row, col = cmd.split()
     row, col = int(row), int(col)
@@ -36,7 +37,6 @@ def playGame(player, ai):
         print('Hit confirmed!')
     else:
         print('That one missed...')
-
 
 
 if __name__ == "__main__":

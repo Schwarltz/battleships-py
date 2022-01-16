@@ -55,6 +55,16 @@ class Sea:
         print("Automap layout:")
         self.print()
 
+    def autoSetShips2(self,ships):
+        while len(ships) > 0:
+            shipType = random.choice(ships)
+            pos = self.getRandomPos()
+            direction = random.choice(['H', 'V'])
+            ship = createShip(shipType, pos.getX(), pos.getY(), direction)
+            
+            if self.__trySetShip(ship):
+                ships.remove(shipType)
+
     def allSunk(self):
         for ship in self.ships:
             if not ship.isSunk():
@@ -65,6 +75,8 @@ class Sea:
         pos = Position(row,col)
         for s in self.ships:
             if s.getHit(pos):
+                if s.isSunk():
+                    print(f"{s.getName()} sunk!")
                 return True
         self.misses.append(pos)
         return False
@@ -88,13 +100,31 @@ class Sea:
 
     def toMap(self):
         sea = [[Legend.WATER.value for i in range(self.width)] for j in range(self.height)]
+        sea = self.showShots(self.showShips(sea))
+
+        return sea
+
+    def showShips(self, sea):
         for ship in self.ships:
             for pos in ship.getPos():
-                sea[pos.getX()][pos.getY()] = ship.getValAtPos(pos).value
+                sea[pos.getX()][pos.getY()] = ship.getType().value
+        
+        return sea
+    
+    def showShots(self, sea):
+        for ship in self.ships:
+            for pos in ship.getPos():
+                if ship.getValAtPos(pos):
+                    sea[pos.getX()][pos.getY()] = Legend.HIT.value
         
         for miss in self.misses:
-            sea[miss.getX()][pos.getY()] = Legend.MISS.value
+            sea[miss.getX()][miss.getY()] = Legend.MISS.value
+        
         return sea
+        
+    def toHiddenMap(self):
+        sea = [[Legend.WATER.value for i in range(self.width)] for j in range(self.height)]
+        return self.showShots(sea)
 
     def print(self):
         sea = self.toMap()
