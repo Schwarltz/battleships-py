@@ -85,6 +85,14 @@ class Sea:
         x = random.randint(0, self.width)
         y = random.randint(0, self.height)
         return Position(x, y)
+    
+    def getRandomShipPos(self):
+        l = []
+        for s in self.ships:
+            l2 = s.getPos()
+            l.extend(l2)
+        
+        return random.choice(l)
 
     def inSea(self, pos):
         return 0 <= pos.getY() < self.height and 0 <= pos.getX() < self.width
