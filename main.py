@@ -39,12 +39,7 @@ def playerMove(ai):
     # determine if the shot was a success
     row, col = cmd.split()
     row, col = int(row), int(col)
-    PSuccess = ai.hit(row,col)
-    if PSuccess:
-        print('Hit confirmed!')
-    else:
-        print('That one missed...')
-
+    ai.hit(row,col)
 '''
 Logic for AI's actions
 '''

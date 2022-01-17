@@ -116,16 +116,18 @@ class Sea:
                 col (int): the column of the shot being fired.
 
             Returns:
-                True if the shot successfully hit a ship,
+                True if the shot successfully hit a ship.
         '''
 
         pos = Position(row,col)
         for s in self.ships:
             if s.getHit(pos):
+                print(f"Hit confirmed on {s.getName()}")
                 if s.isSunk():
                     print(f"{s.getName()} sunk!")
                 return True
         self.misses.append(pos)
+        print(f"That one missed...")
         return False
         
     def getRandomPos(self):
